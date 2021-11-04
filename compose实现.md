@@ -32,3 +32,13 @@ const compose = (...funcs) => funcs.reverse().reduce((f, g) => {
   return (...args) => g.call(null, f.apply(null, args));
 }, funcs.shift())
 ```
+
+方法三
+```js
+const compose = (...funcs) => (...args) => {
+  const init = funcs.pop();
+  return funcs.reverse().reduce((prev, curr) => {
+    return prev.then(res => curr.call(null, res));
+  }, Promise.resolve(init.apply(null, args)))
+}
+```
