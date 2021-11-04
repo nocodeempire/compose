@@ -1,4 +1,4 @@
-````js
+```javascript
 let init = (...args) => args.reduce((ele1, ele2) => ele1 + ele2, 0);
 let step2 = (val) => val + 2;
 let step3 = (val) => val + 3;
@@ -9,10 +9,10 @@ let steps = [step4, step3, step2, init];
 
 let composeFunc = compose(...steps)
 console.log(composeFunc(1, 2, 3))
-````
+```
 
 方法一
-````js
+```javascript
 const compose = (...args) => {
   let length = args.length,
     index = length - 1,
@@ -24,11 +24,11 @@ const compose = (...args) => {
     return f(result);
   }
 }
-````
+```
 
 方法二
-````js
+```javascript
 const compose = (...funcs) => funcs.reverse().reduce((f, g) => {
   return (...args) => g.call(null, f.apply(null, args));
 }, funcs.shift())
-````
+```
