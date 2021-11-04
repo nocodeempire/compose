@@ -13,6 +13,7 @@ console.log(composeFunc(1, 2, 3))
 
 方法一
 ```js
+// 递归队列
 const compose = (...args) => {
   let length = args.length,
     index = length - 1,
@@ -28,6 +29,7 @@ const compose = (...args) => {
 
 方法二
 ```js
+// 方法调用后的返回结果给下一个方法
 const compose = (...funcs) => funcs.reverse().reduce((f, g) => {
   return (...args) => g.call(null, f.apply(null, args));
 }, funcs.shift())
@@ -35,6 +37,7 @@ const compose = (...funcs) => funcs.reverse().reduce((f, g) => {
 
 方法三
 ```js
+// Promise
 const compose = (...funcs) => (...args) => {
   const init = funcs.pop();
   return funcs.reverse().reduce((prev, curr) => {
